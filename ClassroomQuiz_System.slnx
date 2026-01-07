@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="Quiz.Client/Quiz.Client.csproj" />
+  <Project Path="Quiz.Server/Quiz.Server.csproj" />
+  <Project Path="Quiz.Shared/Quiz.Shared.csproj" />
+</Solution>
