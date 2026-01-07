@@ -2,7 +2,7 @@
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Project Path="Quiz.Client/Quiz.Client.csproj" />
-  <Project Path="Quiz.Server/Quiz.Server.csproj" />
-  <Project Path="Quiz.Shared/Quiz.Shared.csproj" />
+  <Project Path="Quiz.Client/Quiz.Client.csproj" Id="dc32b4f7-c19e-4027-b0ae-d50db316def3" />
+  <Project Path="Quiz.Server/Quiz.Server.csproj" Id="b3f7d3e0-2160-4d1e-ac30-bea6dda0fd3b" />
+  <Project Path="Quiz.Shared/Quiz.Shared.csproj" Id="1cbced4c-5097-4bdc-844b-dabeb8548b82" />
 </Solution>

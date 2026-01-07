@@ -1,12 +1,26 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Quiz.Shared;
+using System;
 
 namespace Quiz.Shared
 {
-    internal class BroadcastData
+    [Serializable]
+    public class BroadcastData
     {
+        public string Message { get; set; }
+        public string Priority { get; set; }  // LOW, NORMAL, HIGH, URGENT
+        public DateTime Timestamp { get; set; }
+
+        public BroadcastData()
+        {
+            Priority = "NORMAL";
+            Timestamp = DateTime.Now;
+        }
+
+        public BroadcastData(string message, string priority = "NORMAL")
+        {
+            Message = message;
+            Priority = priority;
+            Timestamp = DateTime.Now;
+        }
     }
 }
