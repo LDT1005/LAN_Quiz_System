@@ -22,7 +22,7 @@ Hệ thống cho phép giáo viên tổ chức thi trắc nghiệm trong mạng 
 
 ## 👥 Phân công nhiệm vụ
 - **Lại Đức Thành (Manager & Core):** Xử lý logic mạng TCP/UDP, thiết kế Data Model, Serialization, Quản lý Git.
-- **Thành viên UI/UX:** Thiết kế giao diện WinForms, Logic xử lý Client, Timer đếm ngược.
+- **Ngô Cao Hùng UI/UX:** Thiết kế giao diện WinForms, Logic xử lý Client, Timer đếm ngược.
 
 ## 🚀 Hướng dẫn cài đặt
 1. Clone dự án: `git clone https://github.com/LDT1005/LAN_Quiz_System.git`
