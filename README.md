@@ -14,7 +14,7 @@ Hệ thống cho phép giáo viên tổ chức thi trắc nghiệm trong mạng 
 - **Quiz.Client**: Ứng dụng dành cho học sinh (Đăng nhập, làm bài, nhận thông báo).
 
 ## ✨ Chức năng chính
-- **Kết nối TCP đa luồng:** Hỗ trợ nhiều máy ảo kết nối cùng lúc.
+- **Kết nối TCP đa luồng:** Hỗ trợ nhiều máy ảo kết nối cùng lúc.=
 - **Broadcast Đề thi:** Gửi đề thi dạng JSON tới tất cả Client đồng loạt.
 - **Chấm điểm thời gian thực:** Tự động so khớp đáp án và hiển thị lên Dashboard giáo viên.
 - **Thông báo UDP Multicast:** Gửi thông báo khẩn cấp dạng Popup tới toàn bộ lớp học.
@@ -28,4 +28,4 @@ Hệ thống cho phép giáo viên tổ chức thi trắc nghiệm trong mạng 
 1. Clone dự án: `git clone https://github.com/LDT1005/LAN_Quiz_System.git`
 2. Mở file `.sln` bằng Visual Studio 2022.
 3. Restore NuGet Packages (Newtonsoft.Json).
-4. Build Solution và chạy Server trên máy thật, Client trên máy ảo VMware.
+4. Build Solution và chạy Server trên máy thật, Client trên máy ảo VMware.+
