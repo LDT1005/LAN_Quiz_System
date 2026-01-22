@@ -1,9 +1,9 @@
-﻿using Newtonsoft.Json.Linq;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using Quiz.Shared;
 using System;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace Quiz.Server.Network
@@ -12,11 +12,10 @@ namespace Quiz.Server.Network
     {
         private readonly TcpClient _client;
         private readonly NetworkStream _stream;
-        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         private readonly StringBuilder _buffer = new StringBuilder();
-
-        public event Action<ClientHandler> OnDisconnected;
+        public event Action<ClientHandler, LoginData> OnLoginRequested;
         public event Action<AnswerSubmit> OnAnswerReceived;
+        public event Action<ClientHandler> OnDisconnected;
 
         public ClientHandler(TcpClient client)
         {
@@ -24,14 +23,14 @@ namespace Quiz.Server.Network
             _stream = client.GetStream();
         }
 
-        public void Start() => Task.Run(new Func<Task>(ReceiveLoopAsync));
+        public void Start() => Task.Run(ReceiveLoop);
 
-        private async Task ReceiveLoopAsync()
+        private async Task ReceiveLoop()
         {
             byte[] buf = new byte[4096];
             try
             {
-                while (!_cts.IsCancellationRequested)
+                while (true)
                 {
                     int read = await _stream.ReadAsync(buf, 0, buf.Length);
                     if (read == 0) break;
@@ -41,7 +40,7 @@ namespace Quiz.Server.Network
                     {
                         string line = _buffer.ToString(0, idx).Trim();
                         _buffer.Remove(0, idx + 1);
-                        if (line.Length > 0) HandleMessage(line);
+                        if (line.Length > 0) HandlePacket(line);
                     }
                 }
             }
@@ -49,24 +48,21 @@ namespace Quiz.Server.Network
             finally { Close(); }
         }
 
-        private void HandleMessage(string json)
+        private void HandlePacket(string json)
         {
-            try
-            {
-                JObject root = JObject.Parse(json);
-                if (root["type"]?.ToString() == "submit")
-                {
-                    var data = root["data"].ToObject<AnswerSubmit>();
-                    OnAnswerReceived?.Invoke(data);
-                }
-            }
-            catch { }
+            var packet = JsonConvert.DeserializeObject<Packet>(json);
+            if (packet.Type == Packet.TYPE_LOGIN)
+                OnLoginRequested?.Invoke(this, JsonConvert.DeserializeObject<LoginData>(packet.Data.ToString()));
+            else if (packet.Type == Packet.TYPE_SUBMIT)
+                OnAnswerReceived?.Invoke(JsonConvert.DeserializeObject<AnswerSubmit>(packet.Data.ToString()));
         }
 
-        public void Close()
+        public void SendPacket(Packet packet)
         {
-            try { _stream?.Close(); _client?.Close(); } catch { }
-            OnDisconnected?.Invoke(this);
+            byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(packet) + "\n");
+            _stream.Write(data, 0, data.Length);
         }
+
+        public void Close() { _stream?.Close(); _client?.Close(); OnDisconnected?.Invoke(this); }
     }
 }

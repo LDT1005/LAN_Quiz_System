@@ -1,4 +1,5 @@
-﻿using Quiz.Server.Network;
+﻿using Newtonsoft.Json;
+using Quiz.Server.Network;
 using Quiz.Shared;
 using System;
 using System.Windows.Forms;
@@ -7,32 +8,33 @@ namespace Quiz.Server
 {
     public partial class Form1 : Form
     {
-        private ServerManager _server;
+        private ServerManager _server = new ServerManager();
+        private ExamSession _currentExam;
 
         public Form1()
         {
             InitializeComponent();
-            this.Load += Form1_Load;
+            _server.OnClientCountChanged += c => Invoke(new Action(() => lblClients.Text = "Clients: " + c));
+            _server.OnAnswerReceived += s => Invoke(new Action(() => txtLog.AppendText($"[{DateTime.Now:HH:mm}] SV {s.StudentID} đã nộp bài.\r\n")));
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        private void btnImport_Click(object sender, EventArgs e)
         {
-            _server = new ServerManager();
-            _server.OnClientCountChanged += count => {
-                this.Invoke(new Action(() => lblClients.Text = "Clients: " + count));
-            };
-
-            _server.OnAnswerReceived += submit => {
-                this.Invoke(new Action(() => {
-                    string info = string.Format("[{0}] BÀI NỘP | SV: {1} | Câu: {2} | Đ/A: {3}{4}",
-                        DateTime.Now.ToString("HH:mm:ss"), submit.StudentID, submit.QuestionID, submit.SelectedAnswer, Environment.NewLine);
-                    txtLog.AppendText(info);
-                    txtLog.ScrollToCaret();
-                }));
-            };
-            _server.Start(8888);
+            using (OpenFileDialog ofd = new OpenFileDialog { Filter = "JSON|*.json" })
+            {
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    _currentExam = JsonConvert.DeserializeObject<ExamSession>(System.IO.File.ReadAllText(ofd.FileName));
+                    txtLog.AppendText($"Đã nhận đề: {_currentExam.ExamTitle}\r\n");
+                }
+            }
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e) => _server?.Stop();
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            if (_currentExam != null) _server.BroadcastExam(_currentExam);
+        }
+
+        private void Form1_Load(object sender, EventArgs e) => _server.Start(8888);
     }
 }
