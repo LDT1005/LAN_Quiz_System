@@ -55,7 +55,6 @@
             this.txtUser.Name = "txtUser";
             this.txtUser.Size = new System.Drawing.Size(202, 22);
             this.txtUser.TabIndex = 2;
-            this.txtUser.TextChanged += new System.EventHandler(this.txtUser_TextChanged);
             // 
             // txtPass
             // 
@@ -83,7 +82,6 @@
             this.lblStatus.Size = new System.Drawing.Size(154, 16);
             this.lblStatus.TabIndex = 5;
             this.lblStatus.Text = "Trạng thái đăng nhập";
-            this.lblStatus.Click += new System.EventHandler(this.lblStatus_Click);
             // 
             // chkShowPass
             // 
@@ -113,10 +111,8 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Name = "LoginForm";
             this.Text = "Đăng nhập";
-            this.Load += new System.EventHandler(this.LoginForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion

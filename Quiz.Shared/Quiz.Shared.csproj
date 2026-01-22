@@ -44,11 +44,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AnswerSubmit.cs" />
     <Compile Include="BroadcastData.cs" />
     <Compile Include="DataHelper.cs" />
     <Compile Include="ExamData.cs" />
     <Compile Include="ExamResult.cs" />
+    <Compile Include="ExamSession.cs" />
     <Compile Include="LoginData.cs" />
+    <Compile Include="Models\ExamAnswer.cs" />
     <Compile Include="Question.cs" />
     <Compile Include="Packet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

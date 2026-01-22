@@ -13,7 +13,7 @@ public class NetworkClientService : IDisposable
     private NetworkStream _stream;
     private CancellationTokenSource _cts;
     public event Action<string> OnRawMessage;
-    public event Action<ExamSession> OnExamSessionReceived;
+    public event Action<ExamViewModel> OnExamSessionReceived;
     public event Action<string> OnStatus;
 
     public async Task ConnectAsync(string host, int port)
@@ -66,7 +66,7 @@ public class NetworkClientService : IDisposable
                     string type = obj?.type;
                     if (type == "examSession")
                     {
-                        var session = JsonConvert.DeserializeObject<ExamSession>(line);
+                        var session = JsonConvert.DeserializeObject<ExamViewModel>(line);
                         OnExamSessionReceived?.Invoke(session);
                         OnStatus?.Invoke("Đã nhận đề thi.");
                     }

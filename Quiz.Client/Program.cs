@@ -1,23 +1,25 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Quiz.Client
 {
-    internal static class Program
+    static class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new LoginForm());
 
+            using (LoginForm login = new LoginForm())
+            {
+                // Chỉ chạy Dashboard khi Login trả về DialogResult.OK
+                if (login.ShowDialog() == DialogResult.OK)
+                {
+                    ClientConnection conn = (ClientConnection)login.Tag;
+                    Application.Run(new DashboardForm(conn));
+                }
+            }
         }
     }
 }

@@ -49,47 +49,46 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClientConnection.cs" />
     <Compile Include="DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="DashboardForm.Designer.cs">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExamForm.cs">
+    <Compile Include="ExamFormV2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExamForm.Designer.cs">
-      <DependentUpon>ExamForm.cs</DependentUpon>
+    <Compile Include="ExamFormV2.Designer.cs">
+      <DependentUpon>ExamFormV2.cs</DependentUpon>
     </Compile>
+    <Compile Include="ExamViewModel.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ExamSession.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Model\ExamSession.Designer.cs">
-      <DependentUpon>ExamSession.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Model\ExamViewModel.cs" />
     <Compile Include="Model\Question.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\Question.Designer.cs">
       <DependentUpon>Question.cs</DependentUpon>
     </Compile>
+    <Compile Include="Network\ExamClientService.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\NetworkClientService.cs" />
     <Compile Include="Service\NetworkClientService.Designer.cs">
       <DependentUpon>NetworkClientService.cs</DependentUpon>
     </Compile>
+    <Compile Include="TcpClientService.cs" />
     <EmbeddedResource Include="DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExamForm.resx">
-      <DependentUpon>ExamForm.cs</DependentUpon>
+    <EmbeddedResource Include="ExamFormV2.resx">
+      <DependentUpon>ExamFormV2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
