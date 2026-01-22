@@ -13,12 +13,13 @@ namespace Quiz.Client
             _connection = connection;
         }
 
-        // FIX LỖI CS1061: Phương thức Designer đang tìm kiếm
+        // Fix CS1061: Bổ sung phương thức Load
         private void DashboardForm_Load(object sender, EventArgs e)
         {
             lblStatus.Text = "Đã kết nối Server";
         }
 
+        // Fix CS1061: Bổ sung phương thức Click
         private void btnRequestExam_Click(object sender, EventArgs e)
         {
             try
@@ -30,11 +31,9 @@ namespace Quiz.Client
             catch (Exception ex) { MessageBox.Show(ex.Message); }
         }
 
-        // FIX LỖI CS1061 và CS7036:
         private void btnStartExam_Click(object sender, EventArgs e)
         {
-            // Truyền connection vào constructor của ExamFormV2
-            ExamFormV2 exam = new ExamFormV2(_connection);
+            ExamFormV2 exam = new ExamFormV2(_connection); // Fix CS7036
             exam.Show();
             this.Hide();
         }

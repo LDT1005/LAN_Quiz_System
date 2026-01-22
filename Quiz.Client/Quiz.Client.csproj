@@ -62,7 +62,6 @@
     <Compile Include="ExamFormV2.Designer.cs">
       <DependentUpon>ExamFormV2.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExamViewModel.cs" />
     <Compile Include="LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,7 +82,6 @@
     <Compile Include="Service\NetworkClientService.Designer.cs">
       <DependentUpon>NetworkClientService.cs</DependentUpon>
     </Compile>
-    <Compile Include="TcpClientService.cs" />
     <EmbeddedResource Include="DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>

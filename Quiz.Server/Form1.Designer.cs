@@ -2,48 +2,30 @@
 {
     partial class Form1
     {
-        private System.ComponentModel.IContainer components = null;
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        #region Windows Form Designer generated code
-
         private void InitializeComponent()
         {
             this.lblClients = new System.Windows.Forms.Label();
+            this.txtLog = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
             // lblClients
-            // 
             this.lblClients.AutoSize = true;
             this.lblClients.Location = new System.Drawing.Point(12, 9);
-            this.lblClients.Name = "lblClients";
-            this.lblClients.Size = new System.Drawing.Size(60, 16);
-            this.lblClients.TabIndex = 0;
             this.lblClients.Text = "Clients: 0";
-            // ❌ ĐÃ XÓA DÒNG Click EVENT
-            // 
+            // txtLog
+            this.txtLog.Location = new System.Drawing.Point(12, 40);
+            this.txtLog.Multiline = true;
+            this.txtLog.ReadOnly = true;
+            this.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtLog.Size = new System.Drawing.Size(776, 398);
             // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtLog);
             this.Controls.Add(this.lblClients);
-            this.Name = "Form1";
             this.Text = "Quiz Server";
             this.ResumeLayout(false);
             this.PerformLayout();
         }
-
-        #endregion
-
         private System.Windows.Forms.Label lblClients;
+        private System.Windows.Forms.TextBox txtLog;
     }
 }

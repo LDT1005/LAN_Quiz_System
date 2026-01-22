@@ -17,10 +17,9 @@ namespace Quiz.Client
             try
             {
                 _connection.Connect();
-                // FIX LỖI CS0103: Sử dụng txtUser thay vì txtMSSV
-                _connection.SendString(txtUser.Text);
+                _connection.SendString(txtUser.Text); // Đã sửa txtMSSV -> txtUser
 
-                this.Tag = _connection; // Lưu lại để Program.cs mang sang Dashboard
+                this.Tag = _connection; // Lưu lại để mang sang Dashboard
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
@@ -29,8 +28,7 @@ namespace Quiz.Client
 
         private void chkShowPass_CheckedChanged(object sender, EventArgs e)
         {
-            // FIX LỖI CS0103: Sử dụng txtPass thay vì txtPassword
-            txtPass.UseSystemPasswordChar = !chkShowPass.Checked;
+            txtPass.UseSystemPasswordChar = !chkShowPass.Checked; // Đã sửa txtPassword -> txtPass
         }
     }
 }
