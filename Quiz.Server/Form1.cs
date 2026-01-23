@@ -36,5 +36,26 @@ namespace Quiz.Server
         }
 
         private void Form1_Load(object sender, EventArgs e) => _server.Start(8888);
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void txtNotice_TextChanged(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtLog_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

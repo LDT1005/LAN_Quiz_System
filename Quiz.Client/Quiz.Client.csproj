@@ -50,30 +50,42 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClientConnection.cs" />
-    <Compile Include="DashboardForm.cs">
+    <Compile Include="Model\DashboardForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DashboardForm.Designer.cs">
+    <Compile Include="Model\DashboardForm.Designer.cs">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="ExamFormV2.cs">
+    <Compile Include="Model\ExamFormV2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ExamFormV2.Designer.cs">
+    <Compile Include="Model\ExamFormV2.Designer.cs">
       <DependentUpon>ExamFormV2.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Model\ExamViewModel.cs" />
+    <Compile Include="Model\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Model\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Model\ExamViewModel.cs" />
     <Compile Include="Model\Question.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Model\Question.Designer.cs">
       <DependentUpon>Question.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\WaitingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Model\WaitingForm.Designer.cs">
+      <DependentUpon>WaitingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Network\ExamClientService.cs" />
     <Compile Include="Program.cs" />
@@ -82,14 +94,23 @@
     <Compile Include="Service\NetworkClientService.Designer.cs">
       <DependentUpon>NetworkClientService.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="DashboardForm.resx">
+    <EmbeddedResource Include="Model\DashboardForm.resx">
       <DependentUpon>DashboardForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ExamFormV2.resx">
+    <EmbeddedResource Include="Model\ExamFormV2.resx">
       <DependentUpon>ExamFormV2.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Model\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\Question.resx">
+      <DependentUpon>Question.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Model\WaitingForm.resx">
+      <DependentUpon>WaitingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

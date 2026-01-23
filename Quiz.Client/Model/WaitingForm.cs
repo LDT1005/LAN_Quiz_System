@@ -8,13 +8,23 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Quiz.Client
+namespace Quiz.Client.Model
 {
     public partial class WaitingForm : Form
     {
         public WaitingForm()
         {
             InitializeComponent();
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void WaitingForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

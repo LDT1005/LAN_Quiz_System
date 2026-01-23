@@ -1,41 +1,25 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Quiz.Client
+namespace Quiz.Client.Model
 {
-    public partial class DashboardForm : Form
+    public partial class DashBoardForm : Form
     {
-        private ClientConnection _connection;
-
-        public DashboardForm(ClientConnection connection)
+        public DashBoardForm()
         {
             InitializeComponent();
-            _connection = connection;
         }
 
-        // Fix CS1061: Bổ sung phương thức Load
-        private void DashboardForm_Load(object sender, EventArgs e)
+        private void DashBoardForm_Load(object sender, EventArgs e)
         {
-            lblStatus.Text = "Đã kết nối Server";
-        }
 
-        // Fix CS1061: Bổ sung phương thức Click
-        private void btnRequestExam_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                _connection.SendString("REQUEST_EXAM");
-                string res = _connection.ReceiveString();
-                lblExamTitle.Text = "Kỳ thi: " + res;
-            }
-            catch (Exception ex) { MessageBox.Show(ex.Message); }
-        }
-
-        private void btnStartExam_Click(object sender, EventArgs e)
-        {
-            ExamFormV2 exam = new ExamFormV2(_connection); // Fix CS7036
-            exam.Show();
-            this.Hide();
         }
     }
 }
