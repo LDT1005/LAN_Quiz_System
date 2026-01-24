@@ -13,14 +13,23 @@ namespace Quiz.Server.Network
         private readonly TcpClient _client;
         private readonly NetworkStream _stream;
         private readonly StringBuilder _buffer = new StringBuilder();
+
+        // THÊM CÁC PROPERTIES NÀY
+        public string StudentID { get; private set; }
+        public string StudentName { get; private set; }
+        public string ClientIP { get; private set; }
+        public bool IsAuthenticated { get; private set; }
+
         public event Action<ClientHandler, LoginData> OnLoginRequested;
-        public event Action<AnswerSubmit> OnAnswerReceived;
+        public event Action<ClientHandler, AnswerSubmit> OnAnswerReceived; // SỬA: THÊM ClientHandler
         public event Action<ClientHandler> OnDisconnected;
 
         public ClientHandler(TcpClient client)
         {
             _client = client;
             _stream = client.GetStream();
+            // LẤY IP ADDRESS
+            ClientIP = ((System.Net.IPEndPoint)client.Client.RemoteEndPoint).Address.ToString();
         }
 
         public void Start() => Task.Run(ReceiveLoop);
@@ -34,35 +43,94 @@ namespace Quiz.Server.Network
                 {
                     int read = await _stream.ReadAsync(buf, 0, buf.Length);
                     if (read == 0) break;
+
                     _buffer.Append(Encoding.UTF8.GetString(buf, 0, read));
+
                     int idx;
                     while ((idx = _buffer.ToString().IndexOf('\n')) >= 0)
                     {
                         string line = _buffer.ToString(0, idx).Trim();
                         _buffer.Remove(0, idx + 1);
-                        if (line.Length > 0) HandlePacket(line);
+                        if (line.Length > 0)
+                        {
+                            HandlePacket(line);
+                        }
                     }
                 }
             }
-            catch { }
-            finally { Close(); }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"ClientHandler error: {ex.Message}");
+            }
+            finally
+            {
+                Close();
+            }
         }
 
         private void HandlePacket(string json)
         {
-            var packet = JsonConvert.DeserializeObject<Packet>(json);
-            if (packet.Type == Packet.TYPE_LOGIN)
-                OnLoginRequested?.Invoke(this, JsonConvert.DeserializeObject<LoginData>(packet.Data.ToString()));
-            else if (packet.Type == Packet.TYPE_SUBMIT)
-                OnAnswerReceived?.Invoke(JsonConvert.DeserializeObject<AnswerSubmit>(packet.Data.ToString()));
+            try
+            {
+                var packet = JsonConvert.DeserializeObject<Packet>(json);
+
+                if (packet.Type == Packet.TYPE_LOGIN)
+                {
+                    var loginData = JsonConvert.DeserializeObject<LoginData>(packet.Data.ToString());
+                    loginData.ClientIP = ClientIP;
+                    OnLoginRequested?.Invoke(this, loginData);
+                }
+                else if (packet.Type == Packet.TYPE_SUBMIT)
+                {
+                    var submit = JsonConvert.DeserializeObject<AnswerSubmit>(packet.Data.ToString());
+                    OnAnswerReceived?.Invoke(this, submit); // SỬA: THÊM this
+                }
+                else if (packet.Type == Packet.TYPE_RECONNECT)
+                {
+                    var loginData = JsonConvert.DeserializeObject<LoginData>(packet.Data.ToString());
+                    loginData.ClientIP = ClientIP;
+                    OnLoginRequested?.Invoke(this, loginData);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"HandlePacket error: {ex.Message}");
+            }
         }
 
         public void SendPacket(Packet packet)
         {
-            byte[] data = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(packet) + "\n");
-            _stream.Write(data, 0, data.Length);
+            try
+            {
+                string json = JsonConvert.SerializeObject(packet) + "\n";
+                byte[] data = Encoding.UTF8.GetBytes(json);
+                _stream.Write(data, 0, data.Length);
+                _stream.Flush();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"SendPacket error: {ex.Message}");
+                Close();
+            }
         }
 
-        public void Close() { _stream?.Close(); _client?.Close(); OnDisconnected?.Invoke(this); }
+        // THÊM METHOD NÀY
+        public void SetAuthenticated(string studentID, string studentName)
+        {
+            StudentID = studentID;
+            StudentName = studentName;
+            IsAuthenticated = true;
+        }
+
+        public void Close()
+        {
+            try
+            {
+                _stream?.Close();
+                _client?.Close();
+                OnDisconnected?.Invoke(this);
+            }
+            catch { }
+        }
     }
 }
