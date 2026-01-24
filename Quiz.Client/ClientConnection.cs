@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Sockets;
+﻿using System.Net.Sockets;
 using System.Text;
 
 namespace Quiz.Client
@@ -8,7 +7,23 @@ namespace Quiz.Client
     {
         private TcpClient _client;
         private NetworkStream _stream;
-        public NetworkStream Stream => _stream;
+
+        // SỬA: Thêm setter cho Client và Stream
+        public TcpClient Client
+        {
+            get => _client;
+            set => _client = value;
+        }
+
+        public NetworkStream Stream
+        {
+            get => _stream;
+            set => _stream = value;
+        }
+
+        // THÊM properties mới
+        public string StudentID { get; set; }
+        public string StudentName { get; set; }
         public bool IsConnected => _client != null && _client.Connected;
 
         public void Connect()
