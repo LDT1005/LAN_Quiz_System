@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace Quiz.Client.Model
 {
@@ -23,6 +24,8 @@ namespace Quiz.Client.Model
         public DashBoardForm()
         {
             InitializeComponent();
+            this.BackgroundImage = Image.FromFile("UTH.png");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private void DashBoardForm_Load(object sender, EventArgs e)

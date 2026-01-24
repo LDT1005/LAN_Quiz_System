@@ -39,10 +39,11 @@
             // 
             // txtServerIP
             // 
-            this.txtServerIP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtServerIP.BackColor = System.Drawing.Color.White;
+            this.txtServerIP.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtServerIP.Location = new System.Drawing.Point(3, 2);
             this.txtServerIP.Name = "txtServerIP";
-            this.txtServerIP.Size = new System.Drawing.Size(100, 24);
+            this.txtServerIP.Size = new System.Drawing.Size(100, 25);
             this.txtServerIP.TabIndex = 0;
             this.txtServerIP.Text = "192.168.1.1";
             // 
@@ -50,7 +51,7 @@
             // 
             this.txtStudentName.Location = new System.Drawing.Point(267, 145);
             this.txtStudentName.Name = "txtStudentName";
-            this.txtStudentName.Size = new System.Drawing.Size(100, 22);
+            this.txtStudentName.Size = new System.Drawing.Size(146, 22);
             this.txtStudentName.TabIndex = 0;
             this.txtStudentName.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
@@ -58,7 +59,7 @@
             // 
             this.txtStudentID.Location = new System.Drawing.Point(267, 187);
             this.txtStudentID.Name = "txtStudentID";
-            this.txtStudentID.Size = new System.Drawing.Size(100, 22);
+            this.txtStudentID.Size = new System.Drawing.Size(146, 22);
             this.txtStudentID.TabIndex = 1;
             // 
             // btnLogin
@@ -87,20 +88,24 @@
             // lblNameSV
             // 
             this.lblNameSV.AutoSize = true;
-            this.lblNameSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameSV.BackColor = System.Drawing.Color.Transparent;
+            this.lblNameSV.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNameSV.ForeColor = System.Drawing.Color.Black;
             this.lblNameSV.Location = new System.Drawing.Point(154, 145);
             this.lblNameSV.Name = "lblNameSV";
-            this.lblNameSV.Size = new System.Drawing.Size(91, 20);
+            this.lblNameSV.Size = new System.Drawing.Size(88, 19);
             this.lblNameSV.TabIndex = 4;
             this.lblNameSV.Text = "Họ và tên :";
             // 
             // lblMSSV
             // 
             this.lblMSSV.AutoSize = true;
-            this.lblMSSV.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMSSV.Location = new System.Drawing.Point(138, 187);
+            this.lblMSSV.BackColor = System.Drawing.Color.Transparent;
+            this.lblMSSV.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMSSV.ForeColor = System.Drawing.Color.Black;
+            this.lblMSSV.Location = new System.Drawing.Point(144, 187);
             this.lblMSSV.Name = "lblMSSV";
-            this.lblMSSV.Size = new System.Drawing.Size(107, 20);
+            this.lblMSSV.Size = new System.Drawing.Size(107, 19);
             this.lblMSSV.TabIndex = 5;
             this.lblMSSV.Text = "ID sinh viên :";
             // 

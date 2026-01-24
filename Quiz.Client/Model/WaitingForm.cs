@@ -15,6 +15,9 @@ namespace Quiz.Client.Model
         public WaitingForm()
         {
             InitializeComponent();
+            this.BackgroundImage = Image.FromFile("Wait.jpg");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
+
         }
 
         private void label2_Click(object sender, EventArgs e)

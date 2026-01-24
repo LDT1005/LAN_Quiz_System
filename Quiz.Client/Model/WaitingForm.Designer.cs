@@ -36,28 +36,33 @@
             // lblMsg
             // 
             this.lblMsg.AutoSize = true;
-            this.lblMsg.Location = new System.Drawing.Point(52, 57);
+            this.lblMsg.BackColor = System.Drawing.Color.Transparent;
+            this.lblMsg.Font = new System.Drawing.Font("Times New Roman", 28.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsg.Location = new System.Drawing.Point(12, 204);
             this.lblMsg.Name = "lblMsg";
-            this.lblMsg.Size = new System.Drawing.Size(44, 16);
+            this.lblMsg.Size = new System.Drawing.Size(272, 53);
             this.lblMsg.TabIndex = 0;
-            this.lblMsg.Text = "label1";
+            this.lblMsg.Text = "Chờ phát đề";
             this.lblMsg.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblStudentNameInfo
             // 
             this.lblStudentNameInfo.AutoSize = true;
-            this.lblStudentNameInfo.Location = new System.Drawing.Point(52, 88);
+            this.lblStudentNameInfo.BackColor = System.Drawing.Color.Transparent;
+            this.lblStudentNameInfo.Font = new System.Drawing.Font("Times New Roman", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblStudentNameInfo.ForeColor = System.Drawing.Color.Black;
+            this.lblStudentNameInfo.Location = new System.Drawing.Point(12, 36);
             this.lblStudentNameInfo.Name = "lblStudentNameInfo";
-            this.lblStudentNameInfo.Size = new System.Drawing.Size(98, 16);
+            this.lblStudentNameInfo.Size = new System.Drawing.Size(302, 45);
             this.lblStudentNameInfo.TabIndex = 1;
-            this.lblStudentNameInfo.Text = "Họ tên học sinh";
+            this.lblStudentNameInfo.Text = "Họ tên học sinh :";
             this.lblStudentNameInfo.Click += new System.EventHandler(this.label2_Click);
             // 
             // progressBar1
             // 
-            this.progressBar1.Location = new System.Drawing.Point(55, 122);
+            this.progressBar1.Location = new System.Drawing.Point(327, 213);
             this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(199, 23);
+            this.progressBar1.Size = new System.Drawing.Size(461, 34);
             this.progressBar1.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.progressBar1.TabIndex = 2;
             // 
