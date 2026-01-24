@@ -13,6 +13,9 @@
             this.txtNotice = new System.Windows.Forms.TextBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.lblClientCount = new System.Windows.Forms.Label();
+            this.colMSSV = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colHoTen = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,12 +86,16 @@
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colMSSV,
+            this.colHoTen,
+            this.colStatus});
             this.dataGridView1.Location = new System.Drawing.Point(151, 242);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(240, 150);
+            this.dataGridView1.Size = new System.Drawing.Size(428, 53);
             this.dataGridView1.TabIndex = 7;
             this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
@@ -100,6 +107,27 @@
             this.lblClientCount.Size = new System.Drawing.Size(128, 16);
             this.lblClientCount.TabIndex = 8;
             this.lblClientCount.Text = "Clients Connected: 0";
+            // 
+            // colMSSV
+            // 
+            this.colMSSV.HeaderText = "MSSV";
+            this.colMSSV.MinimumWidth = 6;
+            this.colMSSV.Name = "colMSSV";
+            this.colMSSV.Width = 125;
+            // 
+            // colHoTen
+            // 
+            this.colHoTen.HeaderText = "Họ và Tên";
+            this.colHoTen.MinimumWidth = 6;
+            this.colHoTen.Name = "colHoTen";
+            this.colHoTen.Width = 125;
+            // 
+            // colStatus
+            // 
+            this.colStatus.HeaderText = "Trạng thái";
+            this.colStatus.MinimumWidth = 6;
+            this.colStatus.Name = "colStatus";
+            this.colStatus.Width = 125;
             // 
             // Form1
             // 
@@ -129,5 +157,8 @@
         private System.Windows.Forms.TextBox txtNotice;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Label lblClientCount;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colMSSV;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
     }
 }

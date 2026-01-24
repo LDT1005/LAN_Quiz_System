@@ -31,13 +31,13 @@
             this.components = new System.ComponentModel.Container();
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblTimer = new System.Windows.Forms.Label();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.progressBar1 = new System.Windows.Forms.ProgressBar();
             this.pnlAnswers = new System.Windows.Forms.FlowLayoutPanel();
             this.pnlQuestionGrid = new System.Windows.Forms.FlowLayoutPanel();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
             this.btnSubmit = new System.Windows.Forms.Button();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // lblTitle
@@ -59,10 +59,6 @@
             this.lblTimer.Size = new System.Drawing.Size(44, 16);
             this.lblTimer.TabIndex = 1;
             this.lblTimer.Text = "label2";
-            // 
-            // timer1
-            // 
-            this.timer1.Interval = 1000;
             // 
             // progressBar1
             // 
@@ -141,12 +137,12 @@
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblTimer;
-        private System.Windows.Forms.Timer timer1;
         private System.Windows.Forms.ProgressBar progressBar1;
         private System.Windows.Forms.FlowLayoutPanel pnlAnswers;
         private System.Windows.Forms.FlowLayoutPanel pnlQuestionGrid;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnNext;
         private System.Windows.Forms.Button btnSubmit;
+        private System.Windows.Forms.Timer timer1;
     }
 }
