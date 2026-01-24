@@ -4,6 +4,8 @@ using System;
 using System.Net.Sockets;
 using System.Text;
 using System.Windows.Forms;
+using System.Drawing;
+
 
 namespace Quiz.Client.Model
 {
@@ -15,6 +17,8 @@ namespace Quiz.Client.Model
         public LoginForm()
         {
             InitializeComponent();
+            this.BackgroundImage = Image.FromFile("UTH.png");
+            this.BackgroundImageLayout = ImageLayout.Stretch;
         }
 
         private void textBox2_TextChanged(object sender, EventArgs e)

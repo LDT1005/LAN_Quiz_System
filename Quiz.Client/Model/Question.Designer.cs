@@ -42,11 +42,12 @@
             // lblQuestionText
             // 
             this.lblQuestionText.AutoSize = true;
-            this.lblQuestionText.Location = new System.Drawing.Point(99, 54);
+            this.lblQuestionText.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblQuestionText.Location = new System.Drawing.Point(12, 23);
             this.lblQuestionText.Name = "lblQuestionText";
-            this.lblQuestionText.Size = new System.Drawing.Size(44, 16);
+            this.lblQuestionText.Size = new System.Drawing.Size(76, 20);
             this.lblQuestionText.TabIndex = 0;
-            this.lblQuestionText.Text = "label1";
+            this.lblQuestionText.Text = "Câu hỏi :";
             // 
             // pnlOptionA
             // 

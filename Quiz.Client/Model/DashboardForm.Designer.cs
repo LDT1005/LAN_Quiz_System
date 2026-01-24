@@ -39,9 +39,9 @@
             this.lblWelcome.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblWelcome.Location = new System.Drawing.Point(34, 60);
             this.lblWelcome.Name = "lblWelcome";
-            this.lblWelcome.Size = new System.Drawing.Size(50, 16);
+            this.lblWelcome.Size = new System.Drawing.Size(163, 16);
             this.lblWelcome.TabIndex = 0;
-            this.lblWelcome.Text = "label1";
+            this.lblWelcome.Text = "Xin chào học sinh UTH";
             // 
             // lblSystemStatus
             // 
@@ -49,9 +49,9 @@
             this.lblSystemStatus.ForeColor = System.Drawing.Color.Green;
             this.lblSystemStatus.Location = new System.Drawing.Point(34, 97);
             this.lblSystemStatus.Name = "lblSystemStatus";
-            this.lblSystemStatus.Size = new System.Drawing.Size(44, 16);
+            this.lblSystemStatus.Size = new System.Drawing.Size(109, 16);
             this.lblSystemStatus.TabIndex = 1;
-            this.lblSystemStatus.Text = "label2";
+            this.lblSystemStatus.Text = "Trạng thái kết nối";
             // 
             // btnReady
             // 

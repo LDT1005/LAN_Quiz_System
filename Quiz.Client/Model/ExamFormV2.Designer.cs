@@ -46,9 +46,9 @@
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTitle.Location = new System.Drawing.Point(12, 9);
             this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(50, 16);
+            this.lblTitle.Size = new System.Drawing.Size(80, 16);
             this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "label1";
+            this.lblTitle.Text = "Kỳ thi 2026";
             // 
             // lblTimer
             // 
@@ -56,9 +56,9 @@
             this.lblTimer.ForeColor = System.Drawing.Color.Red;
             this.lblTimer.Location = new System.Drawing.Point(12, 50);
             this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(44, 16);
+            this.lblTimer.Size = new System.Drawing.Size(69, 16);
             this.lblTimer.TabIndex = 1;
-            this.lblTimer.Text = "label2";
+            this.lblTimer.Text = "Thời gian :";
             // 
             // progressBar1
             // 
