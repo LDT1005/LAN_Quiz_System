@@ -1,33 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Quiz.Client.Model
 {
     public partial class WaitingForm : Form
     {
-        public WaitingForm()
+        public WaitingForm(string studentName)
         {
             InitializeComponent();
-            this.BackgroundImage = Image.FromFile("Wait.jpg");
-            this.BackgroundImageLayout = ImageLayout.Stretch;
+            try
+            {
+                this.BackgroundImage = Image.FromFile("Wait.jpg");
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            catch { }
 
+            // Hiển thị tên học sinh lên giao diện
+            lblStudentNameInfo.Text = $"Học sinh: {studentName}";
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+        // Giữ lại constructor mặc định cho Designer
+        public WaitingForm() { InitializeComponent(); }
 
-        }
-
-        private void WaitingForm_Load(object sender, EventArgs e)
-        {
-
-        }
+        private void WaitingForm_Load(object sender, EventArgs e) { }
+        private void label2_Click(object sender, EventArgs e) { }
     }
 }
