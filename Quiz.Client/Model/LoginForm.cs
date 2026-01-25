@@ -1,11 +1,11 @@
 ﻿using Newtonsoft.Json;
 using Quiz.Shared;
 using System;
+using System.Drawing;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Drawing;
-
 
 namespace Quiz.Client.Model
 {
@@ -17,12 +17,12 @@ namespace Quiz.Client.Model
         public LoginForm()
         {
             InitializeComponent();
-            this.BackgroundImage = Image.FromFile("UTH.png");
-            this.BackgroundImageLayout = ImageLayout.Stretch;
-        }
-
-        private void textBox2_TextChanged(object sender, EventArgs e)
-        {
+            try
+            {
+                this.BackgroundImage = Image.FromFile("UTH.png");
+                this.BackgroundImageLayout = ImageLayout.Stretch;
+            }
+            catch { }
         }
 
         private void LoginForm_Load(object sender, EventArgs e)
@@ -33,11 +33,9 @@ namespace Quiz.Client.Model
 
         private async void btnLogin_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtStudentID.Text) ||
-                string.IsNullOrWhiteSpace(txtStudentName.Text))
+            if (string.IsNullOrWhiteSpace(txtStudentID.Text) || string.IsNullOrWhiteSpace(txtStudentName.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -56,25 +54,22 @@ namespace Quiz.Client.Model
                     StudentName = txtStudentName.Text.Trim()
                 };
 
+                // GỬI GÓI TIN CHUẨN (4-byte length prefix)
                 var packet = new Packet(Packet.TYPE_LOGIN, loginData.StudentID, loginData);
-                string json = JsonConvert.SerializeObject(packet) + "\n";
-                byte[] dataBytes = Encoding.UTF8.GetBytes(json); // SỬA: Đổi tên biến
-
-                await _stream.WriteAsync(dataBytes, 0, dataBytes.Length); // SỬA
-                await _stream.FlushAsync();
+                DataHelper.SendObject(_stream, packet);
 
                 lblStatus.Text = "Đợi phản hồi từ server...";
 
-                byte[] buffer = new byte[4096];
-                int bytesRead = await _stream.ReadAsync(buffer, 0, buffer.Length);
-                string response = Encoding.UTF8.GetString(buffer, 0, bytesRead).Trim();
+                // ĐỌC PHẢN HỒI CHUẨN
+                byte[] responseBytes = await Task.Run(() => DataHelper.ReadPacket(_stream));
+                if (responseBytes == null) throw new Exception("Server ngắt kết nối.");
 
-                var responsePacket = JsonConvert.DeserializeObject<Packet>(response);
+                string responseJson = Encoding.UTF8.GetString(responseBytes);
+                var responsePacket = JsonConvert.DeserializeObject<Packet>(responseJson);
 
                 if (responsePacket.Type == Packet.TYPE_LOGIN_SUCCESS)
                 {
                     lblStatus.Text = "Đăng nhập thành công!";
-
                     var connection = new ClientConnection
                     {
                         Client = _client,
@@ -87,30 +82,21 @@ namespace Quiz.Client.Model
                     this.DialogResult = DialogResult.OK;
                     this.Close();
                 }
-                else if (responsePacket.Type == Packet.TYPE_LOGIN_FAILED)
+                else
                 {
-                    dynamic responseData = JsonConvert.DeserializeObject(responsePacket.Data.ToString()); // SỬA: Đổi tên biến
-                    MessageBox.Show($"Đăng nhập thất bại:\n{responseData.Reason}", "Lỗi",
-                        MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                    lblStatus.Text = "Đăng nhập thất bại";
+                    MessageBox.Show("Đăng nhập thất bại!", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     btnLogin.Enabled = true;
-
-                    _stream?.Close();
-                    _client?.Close();
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Lỗi kết nối:\n{ex.Message}", "Lỗi",
-                    MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-                lblStatus.Text = "Kết nối thất bại";
+                MessageBox.Show($"Lỗi: {ex.Message}", "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 btnLogin.Enabled = true;
-
-                _stream?.Close();
                 _client?.Close();
             }
         }
+
+        // Stub để tránh lỗi Designer
+        private void textBox2_TextChanged(object sender, EventArgs e) { }
     }
 }
