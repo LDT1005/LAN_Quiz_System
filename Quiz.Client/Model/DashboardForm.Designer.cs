@@ -66,6 +66,7 @@
             this.btnReady.TabIndex = 2;
             this.btnReady.Text = "Sẵn Sàng";
             this.btnReady.UseVisualStyleBackColor = false;
+            this.btnReady.Click += new System.EventHandler(this.btnReady_Click);
             // 
             // DashBoardForm
             // 

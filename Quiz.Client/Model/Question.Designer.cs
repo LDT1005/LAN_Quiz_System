@@ -88,6 +88,7 @@
             this.rbA.TabStop = true;
             this.rbA.Text = "A";
             this.rbA.UseVisualStyleBackColor = true;
+            this.rbA.Click += new System.EventHandler(this.rbA_Click);
             // 
             // rbC
             // 
@@ -99,6 +100,8 @@
             this.rbC.TabStop = true;
             this.rbC.Text = "C";
             this.rbC.UseVisualStyleBackColor = true;
+            this.rbC.CheckedChanged += new System.EventHandler(this.rbC_CheckedChanged);
+            this.rbC.Click += new System.EventHandler(this.rbC_Click);
             // 
             // rbB
             // 
@@ -110,6 +113,7 @@
             this.rbB.TabStop = true;
             this.rbB.Text = "B";
             this.rbB.UseVisualStyleBackColor = true;
+            this.rbB.Click += new System.EventHandler(this.rbB_Click);
             // 
             // rbD
             // 
@@ -121,6 +125,7 @@
             this.rbD.TabStop = true;
             this.rbD.Text = "D";
             this.rbD.UseVisualStyleBackColor = true;
+            this.rbD.Click += new System.EventHandler(this.rbD_Click);
             // 
             // Question
             // 

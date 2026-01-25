@@ -55,6 +55,7 @@
             this.btnImportExam.TabIndex = 2;
             this.btnImportExam.Text = "Import Đề Thi (JSON)";
             this.btnImportExam.UseVisualStyleBackColor = false;
+            this.btnImportExam.Click += new System.EventHandler(this.btnImportExam_Click_1);
             // 
             // btnExport
             // 
@@ -67,6 +68,7 @@
             this.btnExport.TabIndex = 3;
             this.btnExport.Text = "Xuất Báo Cáo (CSV)";
             this.btnExport.UseVisualStyleBackColor = false;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click_1);
             // 
             // btnStartExam
             // 
@@ -78,6 +80,7 @@
             this.btnStartExam.TabIndex = 4;
             this.btnStartExam.Text = "BẮT ĐẦU THI";
             this.btnStartExam.UseVisualStyleBackColor = false;
+            this.btnStartExam.Click += new System.EventHandler(this.btnStartExam_Click_1);
             // 
             // btnSendNotice
             // 
@@ -89,6 +92,7 @@
             this.btnSendNotice.TabIndex = 5;
             this.btnSendNotice.Text = "Gửi Thông Báo";
             this.btnSendNotice.UseVisualStyleBackColor = false;
+            this.btnSendNotice.Click += new System.EventHandler(this.btnSendNotice_Click_1);
             // 
             // txtNotice
             // 
@@ -174,6 +178,19 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+            this.btnOpenPort = new System.Windows.Forms.Button();
+            // ...
+            this.btnOpenPort.BackColor = System.Drawing.Color.Orange;
+            this.btnOpenPort.Font = new System.Drawing.Font("Times New Roman", 9F, System.Drawing.FontStyle.Bold);
+            this.btnOpenPort.Location = new System.Drawing.Point(400, 119);
+            this.btnOpenPort.Name = "btnOpenPort";
+            this.btnOpenPort.Size = new System.Drawing.Size(132, 32);
+            this.btnOpenPort.TabIndex = 10;
+            this.btnOpenPort.Text = "MỞ CỔNG KẾT NỐI";
+            this.btnOpenPort.UseVisualStyleBackColor = false;
+            this.btnOpenPort.Click += new System.EventHandler(this.btnOpenPort_Click);
+            // ...
+            this.Controls.Add(this.btnOpenPort);
         }
         private System.Windows.Forms.Label lblClients;
         private System.Windows.Forms.TextBox txtLog;
@@ -188,5 +205,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn colHoTen;
         private System.Windows.Forms.DataGridViewTextBoxColumn colStatus;
         private System.Windows.Forms.PictureBox picLogo;
+        private System.Windows.Forms.Button btnOpenPort;
     }
 }
