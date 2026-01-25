@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Quiz.Client.Model;
+using Quiz.Shared;
 using System;
 using System.Net.Sockets;
 using System.Text;
@@ -14,7 +15,6 @@ namespace Quiz.Client.Network
         private NetworkStream _stream;
         private CancellationTokenSource _cts;
 
-        public event Action<string> OnRawMessage;
         public event Action<ExamViewModel> OnExamSessionReceived;
         public event Action<string> OnStatus;
 
@@ -30,76 +30,41 @@ namespace Quiz.Client.Network
 
                 _ = Task.Run(() => ReceiveLoopAsync(_cts.Token));
             }
-            catch (Exception ex)
-            {
-                OnStatus?.Invoke($"Lỗi kết nối: {ex.Message}");
-            }
+            catch (Exception ex) { OnStatus?.Invoke($"Lỗi kết nối: {ex.Message}"); }
         }
 
         private async Task ReceiveLoopAsync(CancellationToken token)
         {
-            var buffer = new byte[4096];
-            var sb = new StringBuilder();
-
-            while (!token.IsCancellationRequested)
+            try
             {
-                int read = await _stream.ReadAsync(buffer, 0, buffer.Length);
-                if (read == 0)
+                while (!token.IsCancellationRequested && _client.Connected)
                 {
-                    OnStatus?.Invoke("Mất kết nối server.");
-                    break;
-                }
+                    // Đọc gói tin có Framing 4 byte header
+                    byte[] payload = await Task.Run(() => DataHelper.ReadPacket(_stream));
+                    if (payload == null) break;
 
-                string chunk = Encoding.UTF8.GetString(buffer, 0, read);
-                sb.Append(chunk);
+                    string json = Encoding.UTF8.GetString(payload);
+                    var packet = JsonConvert.DeserializeObject<Packet>(json);
 
-                int idx;
-                while ((idx = sb.ToString().IndexOf('\n')) >= 0)
-                {
-                    string line = sb.ToString().Substring(0, idx).Trim();
-                    sb.Remove(0, idx + 1);
-                    if (line.Length == 0) continue;
-
-                    OnRawMessage?.Invoke(line);
-
-                    try
+                    if (packet.Type == Packet.TYPE_START_EXAM)
                     {
-                        var obj = JsonConvert.DeserializeObject<dynamic>(line);
-                        string type = obj?.type;
-                        if (type == "examSession")
-                        {
-                            var session = JsonConvert.DeserializeObject<ExamViewModel>(line);
-                            OnExamSessionReceived?.Invoke(session);
-                            OnStatus?.Invoke("Đã nhận đề thi.");
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        OnStatus?.Invoke($"Lỗi parse JSON: {ex.Message}");
+                        var session = JsonConvert.DeserializeObject<ExamViewModel>(packet.Data.ToString());
+                        OnExamSessionReceived?.Invoke(session);
                     }
                 }
             }
+            catch { OnStatus?.Invoke("Mất kết nối server."); }
         }
 
         public async Task SendAsync(object obj, CancellationToken token = default)
         {
-            if (_stream == null)
-            {
-                OnStatus?.Invoke("Chưa kết nối server.");
-                return;
-            }
-
-            var json = JsonConvert.SerializeObject(obj) + "\n";
-            var bytes = Encoding.UTF8.GetBytes(json);
-            await _stream.WriteAsync(bytes, 0, bytes.Length);
-            await _stream.FlushAsync();
+            if (_stream == null) return;
+            await Task.Run(() => DataHelper.SendObject(_stream, obj));
         }
 
         public void Dispose()
         {
-            try { _cts?.Cancel(); } catch { }
-            try { _stream?.Dispose(); } catch { }
-            try { _client?.Close(); } catch { }
+            _cts?.Cancel(); _stream?.Dispose(); _client?.Close();
         }
     }
 }

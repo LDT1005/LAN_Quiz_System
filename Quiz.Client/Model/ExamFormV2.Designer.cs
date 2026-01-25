@@ -2,30 +2,14 @@
 {
     partial class ExamFormV2
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
+            if (disposing && (components != null)) { components.Dispose(); }
             base.Dispose(disposing);
         }
 
-        #region Windows Form Designer generated code
-
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
@@ -39,102 +23,57 @@
             this.btnSubmit = new System.Windows.Forms.Button();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
-            // 
+
             // lblTitle
-            // 
             this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             this.lblTitle.Location = new System.Drawing.Point(12, 9);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(80, 16);
-            this.lblTitle.TabIndex = 0;
-            this.lblTitle.Text = "Kỳ thi 2026";
-            // 
+            this.lblTitle.Size = new System.Drawing.Size(120, 21);
+            this.lblTitle.Text = "Đang tải đề...";
+
             // lblTimer
-            // 
             this.lblTimer.AutoSize = true;
             this.lblTimer.ForeColor = System.Drawing.Color.Red;
-            this.lblTimer.Location = new System.Drawing.Point(12, 50);
-            this.lblTimer.Name = "lblTimer";
-            this.lblTimer.Size = new System.Drawing.Size(69, 16);
-            this.lblTimer.TabIndex = 1;
-            this.lblTimer.Text = "Thời gian :";
-            // 
-            // progressBar1
-            // 
-            this.progressBar1.Location = new System.Drawing.Point(15, 82);
-            this.progressBar1.Name = "progressBar1";
-            this.progressBar1.Size = new System.Drawing.Size(193, 23);
-            this.progressBar1.TabIndex = 2;
-            this.progressBar1.Value = 100;
-            // 
-            // pnlAnswers
-            // 
-            this.pnlAnswers.AutoScroll = true;
-            this.pnlAnswers.Location = new System.Drawing.Point(15, 122);
-            this.pnlAnswers.Name = "pnlAnswers";
-            this.pnlAnswers.Size = new System.Drawing.Size(200, 100);
-            this.pnlAnswers.TabIndex = 3;
-            // 
-            // pnlQuestionGrid
-            // 
-            this.pnlQuestionGrid.Location = new System.Drawing.Point(236, 122);
-            this.pnlQuestionGrid.Name = "pnlQuestionGrid";
-            this.pnlQuestionGrid.Size = new System.Drawing.Size(200, 100);
-            this.pnlQuestionGrid.TabIndex = 0;
-            // 
+            this.lblTimer.Location = new System.Drawing.Point(12, 45);
+            this.lblTimer.Text = "Thời gian: 00:00";
+
             // btnBack
-            // 
-            this.btnBack.Location = new System.Drawing.Point(12, 228);
-            this.btnBack.Name = "btnBack";
-            this.btnBack.Size = new System.Drawing.Size(75, 23);
-            this.btnBack.TabIndex = 0;
-            this.btnBack.Text = "Back";
-            this.btnBack.UseVisualStyleBackColor = true;
-            // 
+            this.btnBack.Location = new System.Drawing.Point(15, 380);
+            this.btnBack.Size = new System.Drawing.Size(75, 30);
+            this.btnBack.Text = "< Trước";
+            this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
+
             // btnNext
-            // 
-            this.btnNext.Location = new System.Drawing.Point(361, 228);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(75, 23);
-            this.btnNext.TabIndex = 1;
-            this.btnNext.Text = "Next";
-            this.btnNext.UseVisualStyleBackColor = true;
-            // 
-            // btnSubmit
-            // 
+            this.btnNext.Location = new System.Drawing.Point(100, 380);
+            this.btnNext.Size = new System.Drawing.Size(75, 30);
+            this.btnNext.Text = "Tiếp >";
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+
+            // btnSubmit (button3)
             this.btnSubmit.BackColor = System.Drawing.Color.Orange;
-            this.btnSubmit.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnSubmit.Location = new System.Drawing.Point(188, 313);
-            this.btnSubmit.Name = "btnSubmit";
-            this.btnSubmit.Size = new System.Drawing.Size(75, 23);
-            this.btnSubmit.TabIndex = 4;
-            this.btnSubmit.Text = "Gửi";
-            this.btnSubmit.UseVisualStyleBackColor = false;
+            this.btnSubmit.Location = new System.Drawing.Point(680, 380);
+            this.btnSubmit.Size = new System.Drawing.Size(100, 35);
+            this.btnSubmit.Text = "NỘP BÀI";
             this.btnSubmit.Click += new System.EventHandler(this.button3_Click);
-            // 
-            // ExamFormV2
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.btnSubmit);
-            this.Controls.Add(this.btnNext);
-            this.Controls.Add(this.btnBack);
-            this.Controls.Add(this.pnlQuestionGrid);
-            this.Controls.Add(this.pnlAnswers);
-            this.Controls.Add(this.progressBar1);
-            this.Controls.Add(this.lblTimer);
-            this.Controls.Add(this.lblTitle);
+
+            // timer1
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+
+            // FlowPanels
+            this.pnlAnswers.Location = new System.Drawing.Point(15, 80);
+            this.pnlAnswers.Size = new System.Drawing.Size(550, 280);
+            this.pnlQuestionGrid.Location = new System.Drawing.Point(580, 80);
+            this.pnlQuestionGrid.Size = new System.Drawing.Size(200, 280);
+
+            // Form
+            this.ClientSize = new System.Drawing.Size(800, 430);
+            this.Controls.AddRange(new System.Windows.Forms.Control[] { this.btnSubmit, this.btnNext, this.btnBack, this.pnlQuestionGrid, this.pnlAnswers, this.progressBar1, this.lblTimer, this.lblTitle });
             this.Name = "ExamFormV2";
-            this.Text = "ExamFormV2";
+            this.Text = "Classroom Quiz - Exam";
             this.Load += new System.EventHandler(this.ExamFormV2_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
-
-        #endregion
 
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblTimer;
