@@ -21,5 +21,30 @@ namespace Quiz.Client.Model
         {
 
         }
+
+        private void rbA_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbC_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbC_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbB_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void rbD_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

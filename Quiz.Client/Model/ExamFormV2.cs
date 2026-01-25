@@ -127,7 +127,6 @@ namespace Quiz.Client.Model
             progressBar1.Value = (int)Math.Max(0, (rem.TotalSeconds / (_exam.DurationMinutes * 60)) * 100);
         }
 
-        // FIX LỖI CS1061: Phương thức xử lý sự kiện nút Gửi
         private void button3_Click(object sender, EventArgs e)
         {
             var result = MessageBox.Show("Bạn có chắc chắn muốn nộp bài?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -140,10 +139,12 @@ namespace Quiz.Client.Model
         private void btnBack_Click(object sender, EventArgs e) => LoadQuestion(_currentQuestionIndex - 1);
         private void btnNext_Click(object sender, EventArgs e) => LoadQuestion(_currentQuestionIndex + 1);
 
+        // LOGIC NỘP BÀI CẢI TIẾN (TỪ BẢN 2)
         private void SubmitExam(bool auto)
         {
-            timer1.Stop();
+            timer1.Stop(); // Dừng đồng hồ ngay lập tức
             btnSubmit.Enabled = false;
+
             try
             {
                 string json = JsonConvert.SerializeObject(_answers);
@@ -154,24 +155,49 @@ namespace Quiz.Client.Model
                     Checksum = DataHelper.CreateChecksum(json),
                     IsAutoSubmit = auto
                 };
+
+                // Gửi bài làm qua luồng Stream
                 DataHelper.SendObject(_connection.Stream, new Packet(Packet.TYPE_SUBMIT, _connection.StudentID, sub));
+
+                // Bắt đầu đợi kết quả từ Server
                 WaitForResult();
             }
-            catch (Exception ex) { MessageBox.Show("Lỗi nộp bài: " + ex.Message); btnSubmit.Enabled = true; }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi gửi bài: " + ex.Message);
+                btnSubmit.Enabled = true;
+            }
         }
 
         private async void WaitForResult()
         {
-            byte[] p = await Task.Run(() => DataHelper.ReadPacket(_connection.Stream));
-            if (p != null)
+            // Sử dụng async/await để không làm đứng màn hình giao diện
+            try
             {
-                var pack = JsonConvert.DeserializeObject<Packet>(Encoding.UTF8.GetString(p));
-                if (pack.Type == Packet.TYPE_RESULT)
+                byte[] p = await Task.Run(() => DataHelper.ReadPacket(_connection.Stream));
+                if (p != null)
                 {
-                    if (File.Exists(GetTempFilePath())) File.Delete(GetTempFilePath());
-                    var res = JsonConvert.DeserializeObject<ExamResult>(pack.Data.ToString());
-                    this.Invoke(new Action(() => { new ResultForm(res, _exam).ShowDialog(); this.Close(); }));
+                    var pack = JsonConvert.DeserializeObject<Packet>(Encoding.UTF8.GetString(p));
+                    if (pack.Type == Packet.TYPE_RESULT)
+                    {
+                        // Xóa file tạm khi nộp thành công
+                        if (File.Exists(GetTempFilePath())) File.Delete(GetTempFilePath());
+
+                        var res = JsonConvert.DeserializeObject<ExamResult>(pack.Data.ToString());
+
+                        // Hiển thị kết quả trên luồng UI chính
+                        this.Invoke(new Action(() =>
+                        {
+                            var resultForm = new ResultForm(res, _exam);
+                            resultForm.ShowDialog();
+                            this.Close();
+                        }));
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Lỗi nhận kết quả: " + ex.Message);
             }
         }
     }
